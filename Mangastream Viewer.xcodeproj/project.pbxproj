@@ -13,6 +13,10 @@
 		A8649E39195A0230009CE2A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8649E37195A0230009CE2A9 /* Main.storyboard */; };
 		A8649E3B195A0230009CE2A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8649E3A195A0230009CE2A9 /* Images.xcassets */; };
 		A8649E47195A0230009CE2A9 /* Mangastream_ViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8649E46195A0230009CE2A9 /* Mangastream_ViewerTests.swift */; };
+		A8790B8B195A34390053CB87 /* ChapterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8790B8A195A34390053CB87 /* ChapterTableViewController.swift */; };
+		A8D974E9195A240C0082FDD8 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D974E6195A240C0082FDD8 /* HTMLNode.m */; };
+		A8D974EA195A240C0082FDD8 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D974E8195A240C0082FDD8 /* HTMLParser.m */; };
+		B5A4946E781B431C803603FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C938E2C85C1B444B8A5EE284 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A45429B9484F490DA045F46F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A8649E2C195A0230009CE2A9 /* Mangastream Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mangastream Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8649E30195A0230009CE2A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8649E31195A0230009CE2A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +41,13 @@
 		A8649E40195A0230009CE2A9 /* Mangastream ViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mangastream ViewerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8649E45195A0230009CE2A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8649E46195A0230009CE2A9 /* Mangastream_ViewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mangastream_ViewerTests.swift; sourceTree = "<group>"; };
+		A8649E50195A1210009CE2A9 /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
+		A8790B8A195A34390053CB87 /* ChapterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterTableViewController.swift; sourceTree = "<group>"; };
+		A8D974E5195A240C0082FDD8 /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
+		A8D974E6195A240C0082FDD8 /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
+		A8D974E7195A240C0082FDD8 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
+		A8D974E8195A240C0082FDD8 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
+		C938E2C85C1B444B8A5EE284 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5A4946E781B431C803603FC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,14 +69,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73B60485DB8844788D2B5F53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C938E2C85C1B444B8A5EE284 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A8649E23195A0230009CE2A9 = {
 			isa = PBXGroup;
 			children = (
 				A8649E2E195A0230009CE2A9 /* Mangastream Viewer */,
 				A8649E43195A0230009CE2A9 /* Mangastream ViewerTests */,
 				A8649E2D195A0230009CE2A9 /* Products */,
+				A45429B9484F490DA045F46F /* Pods.xcconfig */,
+				73B60485DB8844788D2B5F53 /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		A8649E2D195A0230009CE2A9 /* Products */ = {
 			isa = PBXGroup;
@@ -77,11 +102,14 @@
 		A8649E2E195A0230009CE2A9 /* Mangastream Viewer */ = {
 			isa = PBXGroup;
 			children = (
+				A8D974E4195A240C0082FDD8 /* ObjC */,
 				A8649E31195A0230009CE2A9 /* AppDelegate.swift */,
-				A8649E33195A0230009CE2A9 /* MasterViewController.swift */,
+				A8649E50195A1210009CE2A9 /* BridgeHeader.h */,
 				A8649E35195A0230009CE2A9 /* DetailViewController.swift */,
-				A8649E37195A0230009CE2A9 /* Main.storyboard */,
 				A8649E3A195A0230009CE2A9 /* Images.xcassets */,
+				A8790B8A195A34390053CB87 /* ChapterTableViewController.swift */,
+				A8649E37195A0230009CE2A9 /* Main.storyboard */,
+				A8649E33195A0230009CE2A9 /* MasterViewController.swift */,
 				A8649E2F195A0230009CE2A9 /* Supporting Files */,
 			);
 			path = "Mangastream Viewer";
@@ -112,6 +140,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A8D974E4195A240C0082FDD8 /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				A8D974E5195A240C0082FDD8 /* HTMLNode.h */,
+				A8D974E6195A240C0082FDD8 /* HTMLNode.m */,
+				A8D974E7195A240C0082FDD8 /* HTMLParser.h */,
+				A8D974E8195A240C0082FDD8 /* HTMLParser.m */,
+			);
+			path = ObjC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +158,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8649E4A195A0230009CE2A9 /* Build configuration list for PBXNativeTarget "Mangastream Viewer" */;
 			buildPhases = (
+				17A3B3D908A647888E45BE22 /* Check Pods Manifest.lock */,
 				A8649E28195A0230009CE2A9 /* Sources */,
 				A8649E29195A0230009CE2A9 /* Frameworks */,
 				A8649E2A195A0230009CE2A9 /* Resources */,
+				CFD4510237D4472B8F9C106B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -161,6 +202,7 @@
 				TargetAttributes = {
 					A8649E2B195A0230009CE2A9 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = TS952TCE6R;
 					};
 					A8649E3F195A0230009CE2A9 = {
 						CreatedOnToolsVersion = 6.0;
@@ -206,14 +248,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		17A3B3D908A647888E45BE22 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CFD4510237D4472B8F9C106B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A8649E28195A0230009CE2A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8790B8B195A34390053CB87 /* ChapterTableViewController.swift in Sources */,
+				A8D974E9195A240C0082FDD8 /* HTMLNode.m in Sources */,
 				A8649E36195A0230009CE2A9 /* DetailViewController.swift in Sources */,
 				A8649E34195A0230009CE2A9 /* MasterViewController.swift in Sources */,
 				A8649E32195A0230009CE2A9 /* AppDelegate.swift in Sources */,
+				A8D974EA195A240C0082FDD8 /* HTMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,23 +406,29 @@
 		};
 		A8649E4B195A0230009CE2A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A45429B9484F490DA045F46F /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Mangastream Viewer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Mangastream Viewer/BridgeHeader.h";
 			};
 			name = Debug;
 		};
 		A8649E4C195A0230009CE2A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A45429B9484F490DA045F46F /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Mangastream Viewer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Mangastream Viewer/BridgeHeader.h";
 			};
 			name = Release;
 		};
@@ -403,6 +487,7 @@
 				A8649E4C195A0230009CE2A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A8649E4D195A0230009CE2A9 /* Build configuration list for PBXNativeTarget "Mangastream ViewerTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +496,7 @@
 				A8649E4F195A0230009CE2A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

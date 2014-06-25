@@ -9,95 +9,88 @@
 import UIKit
 
 class MasterViewController: UITableViewController {
-
-    var detailViewController: DetailViewController? = nil
-    var objects = NSMutableArray()
-
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            self.clearsSelectionOnViewWillAppear = false
-            self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
-        }
+  
+  var detailViewController: DetailViewController? = nil
+  var objects = NSMutableArray()
+  var data: NSData = NSData()
+  var manga: (name: String, url: String)[] = []
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+      self.clearsSelectionOnViewWillAppear = false
+      self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = controllers[controllers.endIndex-1].topViewController as? DetailViewController
-        }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    
+    if let split = self.splitViewController {
+      let controllers = split.viewControllers
+      self.detailViewController = controllers[controllers.endIndex-1].topViewController as? DetailViewController
     }
+    
+    let urlPath: String = "http://mangastream.com/manga"
+    var url: NSURL = NSURL(string: urlPath)
+    var request: NSURLRequest = NSURLRequest(URL: url)
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
+    
+    var output = NSString(data: data, encoding: NSUTF8StringEncoding)
+    println("Output \(output)")
+    
+    var html = DTHTMLParser(data: data, encoding: NSUTF8StringEncoding)
+
+    var parser = HTMLParser(string: output, error: nil)
+    var body = parser.body()
+    var mangatrs = body.findChildTags("tr") as HTMLNode[]
+    mangatrs.removeAtIndex(0)
+    manga = mangatrs.map({ (tr:HTMLNode) -> (String, String) in
+      println(tr.rawContents())
+      var href = tr.findChildTag("strong").findChildTag("a")
+      var link = href.getAttributeNamed("href")
+      var name = href.contents()
+      self.insertNewObject(name)
+      return (name, link)
+    })
+    
+    println("Links \(manga)")
+  }
+  
+  func insertNewObject(manga: String) {
+    if objects == nil {
+      objects = NSMutableArray()
     }
-
-    func insertNewObject(sender: AnyObject) {
-        if objects == nil {
-            objects = NSMutableArray()
-        }
-        objects.insertObject(NSDate.date(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+    objects.addObject(manga)
+    let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+  }
+  
+  // #pragma mark - Segues
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "showChapters" {
+      let indexPath = self.tableView.indexPathForSelectedRow()
+      let object = manga[indexPath.row]
+      ((segue.destinationViewController as UINavigationController).topViewController as ChapterTableViewController).mangaName = object.name
+      ((segue.destinationViewController as UINavigationController).topViewController as ChapterTableViewController).url = object.url
     }
-
-    // #pragma mark - Segues
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
-            let indexPath = self.tableView.indexPathForSelectedRow()
-            let object = objects[indexPath.row] as NSDate
-            ((segue.destinationViewController as UINavigationController).topViewController as DetailViewController).detailItem = object
-        }
-    }
-
-    // #pragma mark - Table View
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
-    }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-
-        let object = objects[indexPath.row] as NSDate
-        cell.textLabel.text = object.description
-        return cell
-    }
-
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            objects.removeObjectAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            let object = objects[indexPath.row] as NSDate
-            self.detailViewController!.detailItem = object
-        }
-    }
-
-
+  }
+  
+  // #pragma mark - Table View
+    
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return objects.count
+  }
+  
+  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+    
+    let object = objects[indexPath.row] as String
+    cell.textLabel.text = object
+    return cell
+  }
 }
 
